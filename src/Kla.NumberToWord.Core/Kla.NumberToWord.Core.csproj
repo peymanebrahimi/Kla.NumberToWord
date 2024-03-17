@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Kla.NumberToWord.Core.UnitTests"/>
+  </ItemGroup>
+
 </Project>

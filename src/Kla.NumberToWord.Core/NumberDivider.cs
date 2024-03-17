@@ -7,8 +7,7 @@ public class NumberDivider
     private readonly DividerOption _dividerOption;
     private readonly WordStore _wordStore;
 
-    public string Cent { get; private set; }
-    public bool HasCent { get; private set; }
+    public string CentPartWord { get; private set; }
 
     public NumberDivider(string input) : this(input, new WordStore(), new DividerOption())
     {
@@ -34,14 +33,16 @@ public class NumberDivider
     public string Parser()
     {
         var decimalSeparatorIndex = _input.IndexOf(_dividerOption.DecimalSeparator);
+        var centPartParser = new CentPartParser(_wordStore);
+
         if (decimalSeparatorIndex == -1)
         {
-            HasCent = false;
+            CentPartWord = centPartParser.GetWordOfCentPart("0");
         }
         else
         {
-            Cent = _input.Substring(decimalSeparatorIndex + 1, _input.Length);
-            HasCent = true;
+            var cent = _input.Substring(decimalSeparatorIndex + 1);
+            CentPartWord = centPartParser.GetWordOfCentPart(cent);
         }
 
         if (IsZero())

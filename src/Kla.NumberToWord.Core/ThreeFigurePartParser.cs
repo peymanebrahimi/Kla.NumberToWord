@@ -1,6 +1,6 @@
 ﻿namespace Kla.NumberToWord.Core;
 
-public class ThreeFigurePartParser
+internal class ThreeFigurePartParser
 {
     private readonly WordStore _wordStore;
 

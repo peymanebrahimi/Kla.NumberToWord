@@ -2,8 +2,9 @@ using FluentAssertions;
 
 namespace Kla.NumberToWord.Core.UnitTests;
 
-public class UnitTest1
+public class FirstPartOfWholeNumberUnitTest
 {
+    // could not achieve by inlineData and theory
     [Fact]
     public void Test1()
     {
