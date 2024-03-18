@@ -54,17 +54,6 @@ internal class NumberToWordConvertor
         return sb.ToString().Trim();
     }
 
-    private bool IsZero()
-    {
-        int.TryParse(_input, out var z);
-        if (z == 0)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
     private void Divide()
     {
         var decimalSeparatorIndex = _input.IndexOf(_dividerOption.DecimalSeparator);
@@ -83,9 +72,9 @@ internal class NumberToWordConvertor
 
     private string ProcessCentToWord()
     {
-        var centPartParser = new CentPartParser(_wordStore);
+        var centPartParser = new FractionalPartParser(_wordStore);
 
-        return centPartParser.GetWordOfCentPart(_centPart);
+        return centPartParser.Process(_centPart);
     }
     private string ProcessDollarToWord()
     {
@@ -105,12 +94,18 @@ internal class NumberToWordConvertor
 
         return sb.ToString().Trim();
     }
-    private readonly Dictionary<int, string> _units = new()
+    
+
+    private bool IsZero()
     {
-        {1, ""},
-        {2, "thousand"},
-        {3, "million"},
-    };
+        int.TryParse(_input, out var result);
+        if (result == 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     private bool IsOneDollar()
     {

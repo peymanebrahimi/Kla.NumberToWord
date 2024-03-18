@@ -32,7 +32,6 @@ public class WordStore
         {70,"seventy"},
         {80,"eighty"},
         {90,"ninety"},
-        //{100,"one hundred"},
     };
 
     public string? GetWordOfNumber(int number)
