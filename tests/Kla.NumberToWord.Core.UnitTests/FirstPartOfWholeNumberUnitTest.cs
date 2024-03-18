@@ -2,164 +2,37 @@ using FluentAssertions;
 
 namespace Kla.NumberToWord.Core.UnitTests;
 
+[Collection(nameof(MyWordStoreFixture))]
 public class FirstPartOfWholeNumberUnitTest
 {
+    private readonly ThreeFigurePartParser _parser;
+
+    public FirstPartOfWholeNumberUnitTest(MyWordStoreFixture fixture)
+    {
+        _parser = new ThreeFigurePartParser(fixture.WordStore);
+    }
+
     // could not achieve by inlineData and theory
     [Fact]
     public void Test1()
     {
-        NumberDivider numberDivider = new NumberDivider("200");
-        numberDivider.Parser().Should().Be("two hundred");
+        _parser.GetWordOfOnePart("200").Should().Be("two hundred");
+        _parser.GetWordOfOnePart("253").Should().Be("two hundred fifty-three");
+        _parser.GetWordOfOnePart("210").Should().Be("two hundred ten");
+        _parser.GetWordOfOnePart("201").Should().Be("two hundred one");
+        _parser.GetWordOfOnePart("012").Should().Be("twelve");
+        _parser.GetWordOfOnePart("57").Should().Be("fifty-seven");
+        _parser.GetWordOfOnePart("13").Should().Be("thirteen");
+        _parser.GetWordOfOnePart("3").Should().Be("three");
+        _parser.GetWordOfOnePart("001").Should().Be("one");
+        _parser.GetWordOfOnePart("010").Should().Be("ten");
+        _parser.GetWordOfOnePart("100").Should().Be("one hundred");
+        _parser.GetWordOfOnePart("01").Should().Be("one");
+        _parser.GetWordOfOnePart("10").Should().Be("ten");
+        _parser.GetWordOfOnePart("101").Should().Be("one hundred one");
+        _parser.GetWordOfOnePart("011").Should().Be("eleven");
+        _parser.GetWordOfOnePart("110").Should().Be("one hundred ten");
+        _parser.GetWordOfOnePart("111").Should().Be("one hundred eleven");
+        _parser.GetWordOfOnePart("1").Should().Be("one");
     }
-    [Fact]
-    public void Test2()
-    {
-        NumberDivider numberDivider = new NumberDivider("253");
-        numberDivider.Parser().Should().Be("two hundred fifty-three");
-    }
-    [Fact]
-    public void Test3()
-    {
-        NumberDivider numberDivider = new NumberDivider("210");
-        numberDivider.Parser().Should().Be("two hundred ten");
-    }
-    [Fact]
-    public void Test4()
-    {
-        NumberDivider numberDivider = new NumberDivider("201");
-        numberDivider.Parser().Should().Be("two hundred one");
-    }
-    [Fact]
-    public void Test5()
-    {
-        NumberDivider numberDivider = new NumberDivider("203");
-        numberDivider.Parser().Should().Be("two hundred three");
-    }
-    [Fact]
-    public void Test6()
-    {
-        NumberDivider numberDivider = new NumberDivider("012");
-        numberDivider.Parser().Should().Be("twelve");
-    }
-    [Fact]
-    public void Test7()
-    {
-        NumberDivider numberDivider = new NumberDivider("57");
-        numberDivider.Parser().Should().Be("fifty-seven");
-    }
-    [Fact]
-    public void Test8()
-    {
-        NumberDivider numberDivider = new NumberDivider("13");
-        numberDivider.Parser().Should().Be("thirteen");
-    }
-    [Fact]
-    public void Test9()
-    {
-        NumberDivider numberDivider = new NumberDivider("3");
-        numberDivider.Parser().Should().Be("three");
-    }
-    [Fact]
-    public void Test10()
-    {
-        NumberDivider numberDivider = new NumberDivider("001");
-        numberDivider.Parser().Should().Be("one");
-    }
-    [Fact]
-    public void Test11()
-    {
-        NumberDivider numberDivider = new NumberDivider("010");
-        numberDivider.Parser().Should().Be("ten");
-    }
-    [Fact]
-    public void Test12()
-    {
-        NumberDivider numberDivider = new NumberDivider("100");
-        numberDivider.Parser().Should().Be("one hundred");
-    }
-    [Fact]
-    public void Test13()
-    {
-        NumberDivider numberDivider = new NumberDivider("03");
-        numberDivider.Parser().Should().Be("three");
-    }
-    [Fact]
-    public void Test14()
-    {
-        NumberDivider numberDivider = new NumberDivider("0");
-        numberDivider.Parser().Should().Be("zero");
-    }
-    [Fact]
-    public void Test15()
-    {
-        NumberDivider numberDivider = new NumberDivider("00");
-        numberDivider.Parser().Should().Be("");
-    }
-    [Fact]
-    public void Test16()
-    {
-        NumberDivider numberDivider = new NumberDivider("000");
-        numberDivider.Parser().Should().Be("");
-    }
-    [Fact]
-    public void Test17()
-    {
-        NumberDivider numberDivider = new NumberDivider("10");
-        numberDivider.Parser().Should().Be("ten");
-    }
-    [Fact]
-    public void Test18()
-    {
-        NumberDivider numberDivider = new NumberDivider("01");
-        numberDivider.Parser().Should().Be("one");
-    }
-    //[Fact]
-    //public void Test19()
-    //{
-    //    NumberDivider divider = new NumberDivider("010");
-    //    divider.Parser().Should().Be("ten");
-    //}
-    //[Fact]
-    //public void Test20()
-    //{
-    //    NumberDivider divider = new NumberDivider("001");
-    //    divider.Parser().Should().Be("one");
-    //}
-    //[Fact]
-    //public void Test21()
-    //{
-    //    NumberDivider divider = new NumberDivider("100");
-    //    divider.Parser().Should().Be("one hundred");
-    //}
-    [Fact]
-    public void Test22()
-    {
-        NumberDivider numberDivider = new NumberDivider("101");
-        numberDivider.Parser().Should().Be("one hundred one");
-    }
-    [Fact]
-    public void Test23()
-    {
-        NumberDivider numberDivider = new NumberDivider("011");
-        numberDivider.Parser().Should().Be("eleven");
-    }
-    [Fact]
-    public void Test24()
-    {
-        NumberDivider numberDivider = new NumberDivider("110");
-        numberDivider.Parser().Should().Be("one hundred ten");
-    }
-    [Fact]
-    public void Test25()
-    {
-        NumberDivider numberDivider = new NumberDivider("111");
-        numberDivider.Parser().Should().Be("one hundred eleven");
-    }
-    [Fact]
-    public void Test26()
-    {
-        NumberDivider numberDivider = new NumberDivider("1");
-        numberDivider.Parser().Should().Be("one");
-    }
-    
 }
