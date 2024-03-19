@@ -1,6 +1,6 @@
 ﻿namespace Kla.NumberToWord.Core;
 
-public class WordStore
+public class WordStore : IWordProvider
 {
     private readonly Dictionary<int, string> _myDictionary = new()
     {

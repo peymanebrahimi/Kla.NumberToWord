@@ -5,7 +5,7 @@ namespace Kla.NumberToWord.Core;
 internal class NumberToWordConvertor
 {
     private readonly string _input;
-    //private readonly WordStore _wordStore;
+    private readonly WordStore _wordStore;
     private readonly DividerOption _dividerOption;
     private string _centPart;
     private string _dollarPart;
@@ -107,6 +107,13 @@ internal class NumberToWordConvertor
         return false;
     }
 
+    private readonly Dictionary<int, string> _units = new()
+    {
+        {1, ""},
+        {2, "thousand"},
+        {3, "million"},
+    };
+    
     private bool IsOneDollar()
     {
         var wholeNumber = _dollarPart.Replace(" ", "");
