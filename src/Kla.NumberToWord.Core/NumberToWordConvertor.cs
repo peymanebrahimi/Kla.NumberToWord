@@ -9,7 +9,7 @@ internal class NumberToWordConvertor
     private readonly string _input;
     private readonly WordStore _wordStore;
     private readonly DividerOption _dividerOption;
-    
+
     private string _centPart;
     private string _dollarPart;
 
@@ -24,18 +24,23 @@ internal class NumberToWordConvertor
         _dividerOption = dividerOption;
     }
 
-    public string Process()
+    public string Convert()
     {
         Divide();
 
-        if (IsZero(_dollarPart))
-        {
-            return "zero";
-        }
+        //if (IsZero(_dollarPart) && string.IsNullOrEmpty(_centPart))
+        //{
+        //    return "zero";
+        //}
 
         var centWord = ProcessCentToWord();
         var dollarWord = ProcessDollarToWord();
 
+        return ConcatTwoParts(centWord, dollarWord);
+    }
+
+    private string ConcatTwoParts(string centWord, string dollarWord)
+    {
         string dollar = "dollars";
         if (IsOneDollar())
         {
@@ -84,6 +89,11 @@ internal class NumberToWordConvertor
 
     private string ProcessDollarToWord()
     {
+        if (IsZeroDollars())
+        {
+            return "zero";
+        }
+
         var wholeNumberArray = _dollarPart.Split(_dividerOption.ThousandSeparator);
 
         var topMostPartNumber = wholeNumberArray.Length;
@@ -100,7 +110,6 @@ internal class NumberToWordConvertor
 
         return sb.ToString().Trim();
     }
-
 
     private bool IsZero(string text)
     {
@@ -132,6 +141,17 @@ internal class NumberToWordConvertor
         return false;
     }
 
+    private bool IsZeroDollars()
+    {
+        var wholeNumber = _dollarPart.Replace(" ", "");
+        int.TryParse(wholeNumber, out var result);
+        if (result == 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
     private void Validate()
     {
         if (_centPart.Length > 2)
