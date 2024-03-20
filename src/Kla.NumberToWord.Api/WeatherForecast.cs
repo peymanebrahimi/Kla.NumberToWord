@@ -10,3 +10,8 @@ public class WeatherForecast
 
     public string? Summary { get; set; }
 }
+
+public class ConvertToWordVm
+{
+    public string Input { get; set; }
+}
