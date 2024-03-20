@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Kla.NumberToWord.Core.Data;
 
 namespace Kla.NumberToWord.Core.Domain;
 

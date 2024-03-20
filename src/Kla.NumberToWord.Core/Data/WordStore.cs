@@ -1,4 +1,6 @@
-﻿namespace Kla.NumberToWord.Core;
+﻿using Kla.NumberToWord.Core.Domain;
+
+namespace Kla.NumberToWord.Core.Data;
 
 public class WordStore : IWordProvider
 {

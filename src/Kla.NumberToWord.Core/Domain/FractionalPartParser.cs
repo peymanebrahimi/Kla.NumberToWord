@@ -1,6 +1,6 @@
-﻿using Kla.NumberToWord.Core.Domain;
+﻿using Kla.NumberToWord.Core.Data;
 
-namespace Kla.NumberToWord.Core;
+namespace Kla.NumberToWord.Core.Domain;
 
 internal class FractionalPartParser: IProcessDigitToWord
 {

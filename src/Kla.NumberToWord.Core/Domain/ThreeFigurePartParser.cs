@@ -1,4 +1,6 @@
-﻿namespace Kla.NumberToWord.Core;
+﻿using Kla.NumberToWord.Core.Data;
+
+namespace Kla.NumberToWord.Core.Domain;
 
 internal class ThreeFigurePartParser
 {

@@ -1,4 +1,4 @@
-﻿namespace Kla.NumberToWord.Core;
+﻿namespace Kla.NumberToWord.Core.Domain;
 
 public interface IWordProvider
 {

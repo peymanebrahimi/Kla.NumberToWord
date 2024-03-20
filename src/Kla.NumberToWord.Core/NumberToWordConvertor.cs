@@ -1,4 +1,6 @@
 ﻿using System.Text;
+using Kla.NumberToWord.Core.Data;
+using Kla.NumberToWord.Core.Domain;
 
 namespace Kla.NumberToWord.Core;
 
@@ -7,28 +9,30 @@ internal class NumberToWordConvertor
     private readonly string _input;
     private readonly WordStore _wordStore;
     private readonly DividerOption _dividerOption;
+    
     private string _centPart;
     private string _dollarPart;
 
     public NumberToWordConvertor(string input) : this(input, new WordStore(), new DividerOption())
     {
-
     }
+
     public NumberToWordConvertor(string input, WordStore wordStore, DividerOption dividerOption)
     {
-        _input = input;
+        _input = input.Trim();
         _wordStore = wordStore;
         _dividerOption = dividerOption;
     }
 
     public string Process()
     {
-        if (IsZero())
+        Divide();
+
+        if (IsZero(_dollarPart))
         {
             return "zero";
         }
 
-        Divide();
         var centWord = ProcessCentToWord();
         var dollarWord = ProcessDollarToWord();
 
@@ -50,7 +54,7 @@ internal class NumberToWordConvertor
         sb.Append(dollar);
         sb.Append(nad);
         sb.Append(centWord);
-        
+
         return sb.ToString().Trim();
     }
 
@@ -68,6 +72,7 @@ internal class NumberToWordConvertor
             _dollarPart = _input.Substring(0, decimalSeparatorIndex);
         }
 
+        Validate();
     }
 
     private string ProcessCentToWord()
@@ -76,6 +81,7 @@ internal class NumberToWordConvertor
 
         return centPartParser.Process(_centPart);
     }
+
     private string ProcessDollarToWord()
     {
         var wholeNumberArray = _dollarPart.Split(_dividerOption.ThousandSeparator);
@@ -94,12 +100,12 @@ internal class NumberToWordConvertor
 
         return sb.ToString().Trim();
     }
-    
 
-    private bool IsZero()
+
+    private bool IsZero(string text)
     {
-        int.TryParse(_input, out var result);
-        if (result == 0)
+        var t = int.TryParse(text, out var result);
+        if (t && result == 0)
         {
             return true;
         }
@@ -113,7 +119,7 @@ internal class NumberToWordConvertor
         {2, "thousand"},
         {3, "million"},
     };
-    
+
     private bool IsOneDollar()
     {
         var wholeNumber = _dollarPart.Replace(" ", "");
@@ -122,6 +128,35 @@ internal class NumberToWordConvertor
         {
             return true;
         }
+
         return false;
+    }
+
+    private void Validate()
+    {
+        if (_centPart.Length > 2)
+        {
+            throw new ConversionException("Cent part length is not acceptable.");
+        }
+
+        if (_dollarPart.Length > 11)
+        {
+            throw new ConversionException("Dollar part length is not acceptable.");
+        }
+
+        var arr = _dollarPart.Split(_dividerOption.ThousandSeparator);
+        foreach (var part in arr)
+        {
+            if (part.Length > 3)
+            {
+                throw new ConversionException("Each part of dollar section cannot be greater than 3 characters");
+            }
+        }
+
+        var justDollarNumber = _dollarPart.Replace(_dividerOption.ThousandSeparator.ToString(), "");
+        if (justDollarNumber.ToString().Length > 9)
+        {
+            throw new ConversionException("Number of figures provided for Dollar part is not acceptable.");
+        }
     }
 }
