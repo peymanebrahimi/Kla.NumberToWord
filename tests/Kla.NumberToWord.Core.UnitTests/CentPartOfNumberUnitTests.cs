@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Kla.NumberToWord.Core.Domain;
 
 namespace Kla.NumberToWord.Core.UnitTests;
 

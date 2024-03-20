@@ -1,4 +1,6 @@
-﻿namespace Kla.NumberToWord.Core.UnitTests;
+﻿using Kla.NumberToWord.Core.Data;
+
+namespace Kla.NumberToWord.Core.UnitTests;
 
 public class MyWordStoreFixture : IDisposable
 {
