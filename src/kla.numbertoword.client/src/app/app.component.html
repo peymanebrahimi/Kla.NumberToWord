@@ -10,11 +10,11 @@
   </mat-toolbar>
 
   <div>
-    <mat-card>
+    <mat-card style="padding: 10px 20px;">
       <mat-card-content>
-        <form style="padding: 10px 0;" [formGroup]="frm" (ngSubmit)="convertToWord()">
-          <div class="row">
-            <mat-form-field class="col-sm-9 col-md-4">
+        <form [formGroup]="frm" (ngSubmit)="convertToWord()">
+          <div>
+            <mat-form-field>
               <mat-label>Your number</mat-label>
               <input matInput type="text" name="userInput" formControlName="userInput" required>
 
