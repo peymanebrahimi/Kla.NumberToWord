@@ -6,4 +6,11 @@ public class ConversionException : Exception
         : base(message)
     {
     }
+
+    public ConversionException(string message, Exception innerException)
+    : base(message, innerException)
+    {
+    }
+
+
 }

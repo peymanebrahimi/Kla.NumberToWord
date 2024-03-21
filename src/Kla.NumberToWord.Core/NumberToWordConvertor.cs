@@ -31,11 +31,7 @@ public class NumberToWordConvertor: INumberToWordConvertor
         Divide();
 
         Validate();
-        //if (IsZero(_dollarPart) && string.IsNullOrEmpty(_centPart))
-        //{
-        //    return "zero";
-        //}
-
+        
         var centWord = ProcessCentToWord();
         var dollarWord = ProcessDollarToWord();
 
