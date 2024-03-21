@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,7 +10,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ConversionResponse, WordToNumberService } from './word-to-number.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'K L A';
-  reslt$?: Observable<null | ConversionResponse>;
+  response$?: Observable<null | ConversionResponse>;
 
   constructor(private formBuilder: FormBuilder,
     private wordToNumberService: WordToNumberService) { }
@@ -36,7 +36,7 @@ export class AppComponent {
   })
 
   convertToWord() {
-    this.reslt$ = this.wordToNumberService.getConvert(this.frm.controls.userInput.value!.toString());
+    this.response$ = this.wordToNumberService.getConvert(this.frm.controls.userInput.value!.toString());
     console.info(this.frm.controls.userInput.value);
   }
 }
