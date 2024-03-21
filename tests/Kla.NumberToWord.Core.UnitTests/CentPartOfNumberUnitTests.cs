@@ -10,7 +10,7 @@ public class CentPartOfNumberUnitTests
 
     public CentPartOfNumberUnitTests(MyWordStoreFixture fixture)
     {
-        _parser = new FractionalPartParser(fixture.WordStore);
+        _parser = new FractionalPartParser(fixture.WordProvider);
     }
 
     [Fact]

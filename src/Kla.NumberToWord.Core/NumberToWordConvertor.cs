@@ -4,7 +4,7 @@ using Kla.NumberToWord.Core.Domain;
 
 namespace Kla.NumberToWord.Core;
 
-internal class NumberToWordConvertor: INumberToWordConvertor
+public class NumberToWordConvertor: INumberToWordConvertor
 {
     private string _input;
     private readonly WordStore _wordStore;
@@ -30,6 +30,7 @@ internal class NumberToWordConvertor: INumberToWordConvertor
 
         Divide();
 
+        Validate();
         //if (IsZero(_dollarPart) && string.IsNullOrEmpty(_centPart))
         //{
         //    return "zero";
@@ -78,8 +79,6 @@ internal class NumberToWordConvertor: INumberToWordConvertor
             _centPart = _input.Substring(decimalSeparatorIndex + 1);
             _dollarPart = _input.Substring(0, decimalSeparatorIndex);
         }
-
-        Validate();
     }
 
     private string ProcessCentToWord()
@@ -91,26 +90,9 @@ internal class NumberToWordConvertor: INumberToWordConvertor
 
     private string ProcessDollarToWord()
     {
-        if (IsZeroDollars())
-        {
-            return "zero";
-        }
+        var x = new WholePartParser(_wordStore, _dividerOption);
 
-        var wholeNumberArray = _dollarPart.Split(_dividerOption.ThousandSeparator);
-
-        var topMostPartNumber = wholeNumberArray.Length;
-        var threeFigurePartParser = new ThreeFigurePartParser(_wordStore);
-        var sb = new StringBuilder();
-        foreach (var item in wholeNumberArray)
-        {
-            sb.Append(threeFigurePartParser.GetWordOfOnePart(item));
-            sb.Append(" ");
-            sb.Append(_units[topMostPartNumber]);
-            sb.Append(" ");
-            topMostPartNumber--;
-        }
-
-        return sb.ToString().Trim();
+        return x.Process(_dollarPart);
     }
 
     private bool IsZero(string text)
@@ -143,17 +125,7 @@ internal class NumberToWordConvertor: INumberToWordConvertor
         return false;
     }
 
-    private bool IsZeroDollars()
-    {
-        var wholeNumber = _dollarPart.Replace(" ", "");
-        int.TryParse(wholeNumber, out var result);
-        if (result == 0)
-        {
-            return true;
-        }
-
-        return false;
-    }
+    
     private void Validate()
     {
         if (_centPart.Length > 2)

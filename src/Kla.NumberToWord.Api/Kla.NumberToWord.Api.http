@@ -4,3 +4,6 @@ GET {{Kla.NumberToWord.Api_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+GET {{Kla.NumberToWord.Api_HostAddress}}/api/ConvertToWord/"503,65"
+Accept: application/json

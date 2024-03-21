@@ -1,13 +1,16 @@
 ﻿using Kla.NumberToWord.Core.Data;
+using Kla.NumberToWord.Core.Domain;
 
 namespace Kla.NumberToWord.Core.UnitTests;
 
 public class MyWordStoreFixture : IDisposable
 {
-    public WordStore WordStore { get; private set; }
+    public IWordProvider WordProvider { get; private set; }
+    public DividerOption DividerOption { get; private set; }
     public MyWordStoreFixture()
     {
-        WordStore = new WordStore();
+        WordProvider = new WordStore();
+        DividerOption = new DividerOption();
     }
 
     public void Dispose()

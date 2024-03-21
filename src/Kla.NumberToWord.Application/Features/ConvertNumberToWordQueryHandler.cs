@@ -1,15 +1,23 @@
-﻿using MediatR;
+﻿using Kla.NumberToWord.Core.Domain;
+using MediatR;
 
 namespace Kla.NumberToWord.Application.Features;
 
-public class ConvertNumberToWordQueryHandler:IRequestHandler<ConvertNumberToWordQuery,ConvertNumberToWordQueryResponse>
+public class ConvertNumberToWordQueryHandler : IRequestHandler<ConvertNumberToWordQuery, ConvertNumberToWordQueryResponse>
 {
-    public ConvertNumberToWordQueryHandler()
+    private readonly INumberToWordConvertor _convertor;
+
+    public ConvertNumberToWordQueryHandler(INumberToWordConvertor convertor)
     {
-        
+        _convertor = convertor;
     }
+
     public Task<ConvertNumberToWordQueryResponse> Handle(ConvertNumberToWordQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var word = _convertor.Convert(request.Input);
+
+        var result = new ConvertNumberToWordQueryResponse(word);
+
+        return Task.FromResult(result);
     }
 }

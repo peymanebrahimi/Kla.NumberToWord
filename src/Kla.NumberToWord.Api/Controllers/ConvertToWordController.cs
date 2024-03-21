@@ -16,10 +16,10 @@ public class ConvertToWordController: ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> Get(ConvertToWordVm vm)
+    [HttpGet("{input}")]
+    public async Task<IActionResult> Get(string input)
     {
-        var result =await _mediator.Send(new ConvertNumberToWordQuery(vm.Input));
+        var result =await _mediator.Send(new ConvertNumberToWordQuery(input));
 
         return Ok(result);
     }

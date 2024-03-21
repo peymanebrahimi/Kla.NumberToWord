@@ -2,25 +2,24 @@
 
 namespace Kla.NumberToWord.Core.Domain;
 
-internal class FractionalPartParser: IProcessDigitToWord
+internal class FractionalPartParser : FigureParser, IProcessDigitToWord
 {
-    private readonly WordStore _wordStore;
-
-    public FractionalPartParser(WordStore wordStore)
+    public FractionalPartParser(IWordProvider wordProvider)
+        : base(wordProvider)
     {
-        _wordStore = wordStore;
     }
 
     public string Process(string cent)
     {
         cent = cent.PadRight(2, '0');
         var number = int.Parse(cent);
-        if (number==0)
+        if (number == 0)
         {
             return string.Empty;
         }
-        var result = _wordStore.GetWordOfNumber(number);
-        
+
+        var result = GetTensAndOnesPlace(number);// _wordProvider.GetWordOfNumber(number);
+
         return $"{result} {GetCentPhrase(number)}".Trim();
     }
 

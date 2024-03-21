@@ -1,6 +1,6 @@
 ﻿namespace Kla.NumberToWord.Core.Domain;
 
-internal interface INumberToWordConvertor
+public interface INumberToWordConvertor
 {
     string Convert(string input);
 }
