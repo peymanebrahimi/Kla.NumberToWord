@@ -4,7 +4,7 @@ using Kla.NumberToWord.Core.Domain;
 
 namespace Kla.NumberToWord.Core;
 
-internal class NumberToWordConvertor
+internal class NumberToWordConvertor: INumberToWordConvertor
 {
     private string _input;
     private readonly WordStore _wordStore;
