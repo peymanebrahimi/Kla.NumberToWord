@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 using Kla.NumberToWord.Application.Extensions;
-using Kla.NumberToWord.Application.Features;
+using Kla.NumberToWord.Core;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Kla.NumberToWord.Application.Behaviours;
+namespace Kla.NumberToWord.Application.Behaviors;
 
 public class ValidatorBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
@@ -40,13 +40,13 @@ public class ValidatorBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest
         {
             _logger.LogWarning("Validation errors - {CommandType} - Command: {@Command} - Errors: {@ValidationErrors}", typeName, request, failures);
 
-            var errorMessage = "ٍError in validation" + Environment.NewLine;
+            var errorMessage = "Error in validation, " + Environment.NewLine;
             foreach (var failure in failures)
             {
                 errorMessage += failure.ErrorMessage + Environment.NewLine;
             }
             
-            throw new NumberToWordConversionException(errorMessage, new ValidationException("Validation exception", failures));
+            throw new ConversionException(errorMessage, new ValidationException("Validation exception", failures));
         }
 
         return await next();

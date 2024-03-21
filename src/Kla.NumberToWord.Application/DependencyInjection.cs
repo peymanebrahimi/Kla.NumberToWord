@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Kla.NumberToWord.Application.Behaviours;
+using Kla.NumberToWord.Application.Behaviors;
 using Kla.NumberToWord.Core;
 using Kla.NumberToWord.Core.Data;
 using Kla.NumberToWord.Core.Domain;
