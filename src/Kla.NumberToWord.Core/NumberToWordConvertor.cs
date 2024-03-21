@@ -6,26 +6,28 @@ namespace Kla.NumberToWord.Core;
 
 internal class NumberToWordConvertor
 {
-    private readonly string _input;
+    private string _input;
     private readonly WordStore _wordStore;
     private readonly DividerOption _dividerOption;
 
     private string _centPart;
     private string _dollarPart;
 
-    public NumberToWordConvertor(string input) : this(input, new WordStore(), new DividerOption())
+    public NumberToWordConvertor() : this(new WordStore(), new DividerOption())
     {
     }
 
-    public NumberToWordConvertor(string input, WordStore wordStore, DividerOption dividerOption)
+    public NumberToWordConvertor(WordStore wordStore, DividerOption dividerOption)
     {
-        _input = input.Trim();
+
         _wordStore = wordStore;
         _dividerOption = dividerOption;
     }
 
-    public string Convert()
+    public string Convert(string input)
     {
+        _input = input.Trim();
+
         Divide();
 
         //if (IsZero(_dollarPart) && string.IsNullOrEmpty(_centPart))
