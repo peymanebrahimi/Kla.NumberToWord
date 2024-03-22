@@ -1,5 +1,6 @@
 using Kla.NumberToWord.Api;
 using Kla.NumberToWord.Application;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,11 @@ builder.Services.AddCors(o => o.AddPolicy("MyCorePolicy", b =>
         .AllowAnyMethod()
         .AllowAnyHeader();
 }));
+
+builder.Host.UseSerilog((hostBuilderContext, loggerConfiguration) =>
+{
+    loggerConfiguration.ReadFrom.Configuration(hostBuilderContext.Configuration);
+});
 
 var app = builder.Build();
 
