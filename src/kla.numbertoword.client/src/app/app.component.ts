@@ -38,7 +38,7 @@ export class AppComponent {
     private snackBar: MatSnackBar) { }
 
   frm = this.formBuilder.group({
-    userInput: new FormControl('99 999,09', [
+    userInput: new FormControl('', [
       Validators.required,
       Validators.minLength(1),
       // Validators.pattern('^[0-9 ,]*$')
