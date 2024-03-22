@@ -22,7 +22,9 @@ public static class ApplicationDependencyInjection
 
         services.AddSingleton<DividerOption>(_ => new DividerOption());
         services.AddSingleton<IWordProvider, WordStore>();
-        services.AddScoped<INumberToWordConvertor, NumberToWordConvertor>();
+        services.AddScoped<INumberToWordConvertor>(x =>
+            new NumberToWordConvertor(x.GetRequiredService<IWordProvider>(),
+            x.GetRequiredService<DividerOption>()));
 
         return services;
     }

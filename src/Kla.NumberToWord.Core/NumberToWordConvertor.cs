@@ -7,7 +7,7 @@ namespace Kla.NumberToWord.Core;
 public class NumberToWordConvertor: INumberToWordConvertor
 {
     private string _input;
-    private readonly WordStore _wordStore;
+    private readonly IWordProvider _wordProvider;
     private readonly DividerOption _dividerOption;
 
     private string _centPart;
@@ -17,10 +17,10 @@ public class NumberToWordConvertor: INumberToWordConvertor
     {
     }
 
-    public NumberToWordConvertor(WordStore wordStore, DividerOption dividerOption)
+    public NumberToWordConvertor(IWordProvider wordProvider, DividerOption dividerOption)
     {
 
-        _wordStore = wordStore;
+        _wordProvider = wordProvider;
         _dividerOption = dividerOption;
     }
 
@@ -79,14 +79,14 @@ public class NumberToWordConvertor: INumberToWordConvertor
 
     private string ProcessCentToWord()
     {
-        var centPartParser = new FractionalPartParser(_wordStore);
+        var centPartParser = new FractionalPartParser(_wordProvider);
 
         return centPartParser.Process(_centPart);
     }
 
     private string ProcessDollarToWord()
     {
-        var x = new WholePartParser(_wordStore, _dividerOption);
+        var x = new WholePartParser(_wordProvider, _dividerOption);
 
         return x.Process(_dollarPart);
     }
