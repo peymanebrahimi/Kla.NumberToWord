@@ -1,6 +1,4 @@
-﻿using Kla.NumberToWord.Core.Data;
-
-namespace Kla.NumberToWord.Core.Domain;
+﻿namespace Kla.NumberToWord.Core.Domain;
 
 internal class FigureParser
 {
@@ -11,7 +9,6 @@ internal class FigureParser
         _wordProvider = wordProvider;
     }
 
-    
     protected string GetTheHundredsPlace(int number)
     {
         var divideBy100 = DivideBy(number, 100);

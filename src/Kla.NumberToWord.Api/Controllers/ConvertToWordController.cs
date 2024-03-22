@@ -1,7 +1,6 @@
-﻿using Kla.NumberToWord.Application;
-using Kla.NumberToWord.Application.Features;
-using Microsoft.AspNetCore.Mvc;
+﻿using Kla.NumberToWord.Application.Features;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Kla.NumberToWord.Api.Controllers;
 

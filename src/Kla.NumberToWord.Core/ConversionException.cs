@@ -11,6 +11,4 @@ public class ConversionException : Exception
     : base(message, innerException)
     {
     }
-
-
 }

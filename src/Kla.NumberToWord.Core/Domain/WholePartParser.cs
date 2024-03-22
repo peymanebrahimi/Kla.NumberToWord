@@ -1,13 +1,12 @@
 ﻿using System.Text;
-using Kla.NumberToWord.Core.Data;
 
 namespace Kla.NumberToWord.Core.Domain;
 
-internal class WholePartParser:FigureParser, IProcessDigitToWord
+internal class WholePartParser : FigureParser, IProcessDigitToWord
 {
     private readonly DividerOption _dividerOption;
     public WholePartParser(IWordProvider wordProvider, DividerOption dividerOption)
-    :base(wordProvider)
+    : base(wordProvider)
     {
         _dividerOption = dividerOption;
     }
@@ -18,11 +17,11 @@ internal class WholePartParser:FigureParser, IProcessDigitToWord
         {
             return "zero";
         }
-        
+
         var wholeNumberArray = dollarPart.Split(_dividerOption.ThousandSeparator);
 
         var topMostPartNumber = wholeNumberArray.Length;
-        
+
         var sb = new StringBuilder();
         foreach (var item in wholeNumberArray)
         {
@@ -46,7 +45,7 @@ internal class WholePartParser:FigureParser, IProcessDigitToWord
 
         return $"{hundredsPlace} {tensAndOnesPlace}".Trim();
     }
-    
+
     private bool IsZeroDollars(string dollarPart)
     {
         var wholeNumber = dollarPart.Replace(" ", "");
@@ -58,7 +57,7 @@ internal class WholePartParser:FigureParser, IProcessDigitToWord
 
         return false;
     }
-    
+
     private readonly Dictionary<int, string> _units = new()
     {
         {1, ""},

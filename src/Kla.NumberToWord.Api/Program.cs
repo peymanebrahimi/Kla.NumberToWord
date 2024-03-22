@@ -8,7 +8,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplication();
-//builder.Services.AddExceptionHandler<ExceptionHandlerMiddleware>();
 
 builder.Services.AddCors(o => o.AddPolicy("MyCorePolicy", b =>
 {
@@ -31,8 +30,6 @@ app.UseCors("MyCorePolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
-//app.UseExceptionHandler();
 
 app.MapControllers();
 
