@@ -12,7 +12,8 @@ public class ConvertNumberToWordQueryHandler : IRequestHandler<ConvertNumberToWo
         _convertor = convertor;
     }
 
-    public Task<ConvertNumberToWordQueryResponse> Handle(ConvertNumberToWordQuery request, CancellationToken cancellationToken)
+    public Task<ConvertNumberToWordQueryResponse> Handle(ConvertNumberToWordQuery request,
+        CancellationToken cancellationToken)
     {
         var word = _convertor.Convert(request.Input);
 

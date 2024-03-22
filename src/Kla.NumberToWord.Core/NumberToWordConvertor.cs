@@ -91,24 +91,6 @@ public class NumberToWordConvertor: INumberToWordConvertor
         return x.Process(_dollarPart);
     }
 
-    //private bool IsZero(string text)
-    //{
-    //    var t = int.TryParse(text, out var result);
-    //    if (t && result == 0)
-    //    {
-    //        return true;
-    //    }
-
-    //    return false;
-    //}
-
-    //private readonly Dictionary<int, string> _units = new()
-    //{
-    //    {1, ""},
-    //    {2, "thousand"},
-    //    {3, "million"},
-    //};
-
     private bool IsOneDollar()
     {
         var wholeNumber = _dollarPart.Replace(" ", "");

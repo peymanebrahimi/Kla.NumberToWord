@@ -6,20 +6,21 @@ using Microsoft.Extensions.Logging;
 
 namespace Kla.NumberToWord.Application.Behaviors;
 
-public class ValidatorBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> 
+public class ValidatorBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
     private readonly ILogger<ValidatorBehavior<TRequest, TResponse>> _logger;
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
-    public ValidatorBehavior(IEnumerable<IValidator<TRequest>> validators, 
+    public ValidatorBehavior(IEnumerable<IValidator<TRequest>> validators,
         ILogger<ValidatorBehavior<TRequest, TResponse>> logger)
     {
         _validators = validators;
         _logger = logger;
     }
 
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
+        CancellationToken cancellationToken)
     {
         if (!_validators.Any())
         {
@@ -47,7 +48,7 @@ public class ValidatorBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest
             {
                 errorMessage += failure.ErrorMessage + Environment.NewLine;
             }
-            
+
             throw new ConversionException(errorMessage, new ValidationException("Validation exception", failures));
         }
 
