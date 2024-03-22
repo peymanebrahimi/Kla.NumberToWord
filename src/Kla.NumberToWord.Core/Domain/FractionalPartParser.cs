@@ -1,6 +1,6 @@
 ﻿namespace Kla.NumberToWord.Core.Domain;
 
-internal class FractionalPartParser : FigureParser, IProcessDigitToWord
+internal class FractionalPartParser : FigureParser
 {
     public FractionalPartParser(IWordProvider wordProvider)
         : base(wordProvider)

@@ -2,7 +2,7 @@
 
 namespace Kla.NumberToWord.Core.Domain;
 
-internal class WholePartParser : FigureParser, IProcessDigitToWord
+internal class WholePartParser : FigureParser
 {
     private readonly DividerOption _dividerOption;
     public WholePartParser(IWordProvider wordProvider, DividerOption dividerOption)
